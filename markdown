@@ -11,7 +11,12 @@
 - I performed a random walk by adding a small random perturbation m_random to m_best and then calculate the accuracy on the KMNIST training data using the new model m.
 If the accuracy improves, I print and update m_best and acc_best.
 
+
+
+
 link to notebook
+
+
 https://colab.research.google.com/drive/1zz_STlkhDkePhOGnmR04aABNDKbMD_o3?usp=sharing
 
 
