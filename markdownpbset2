@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import torch
+import torch.nn.functional as F
+import imageio
+
+- This section imports the necessary libraries for working with numerical operations, visualization, and deep learning.
+
+image = imageio.imread("URL_TO_IMAGE")
+image = torch.tensor(image, dtype=torch.float32).permute(2, 0, 1)
+
+- It loads an image from a specified URL, converts it to a PyTorch tensor, and rearranges the dimensions to match the format expected by the neural network (channels-first format).
+
+num_filters = 10
+filters = torch.randn(num_filters, 3, 3, 3)
+
+- Random filters (kernels) are created. Each filter has 3 input channels (matching the image) and a size of 3x3.
+
+feature_maps = F.conv2d(image.unsqueeze(0), filters, padding=1)
+
+- The image is convolved with the filters using the F.conv2d function from PyTorch. Padding of 1 is added to the input image.
+
+plt.figure(figsize=(15, 6))
+
+# Plot the filters
+for i in range(num_filters):
+    plt.subplot(2, num_filters, i + 1)
+    filter_image = filters[i].permute(1, 2, 0).numpy()
+    plot(filter_image, title=f'Filter {i + 1}')
+
+# Plot the feature maps
+for i in range(num_filters):
+    plt.subplot(2, num_filters, num_filters + i + 1)
+    feature_map = feature_maps[0, i].detach().numpy()
+    plot(feature_map, title=f'Feature Map {i + 1}')
+
+plt.show()
+
+- The code creates subplots to visualize the random filters and the corresponding feature maps after the convolution operation. Filters and feature maps are displayed using the plot function, and the resulting visualization shows how the filters transform the input image into different feature maps.
